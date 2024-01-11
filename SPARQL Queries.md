@@ -203,3 +203,50 @@ select distinct ?verse ?verseText ?simVerse ?sVerseText where {
     FILTER ((lang(?verseText) = 'ar') && (lang(?sVerseText)='ar'))
 } 
 ```
+6. List of Verses of the Quran and the Events discussed in each verse (English).
+```
+PREFIX : <http://quranontology.com/Resource/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX qur: <http://quranontology.com/Resource/>
+select distinct ?verse ?verseText ?eventLabel where { 
+	?verse a :Verse.
+    ?verse rdfs:label ?verseText.
+    ?event :MentionedIn ?verse .
+    ?event a qur:Event.
+    ?event rdfs:label ?eventLabel.
+    
+    FILTER ((lang(?eventLabel) = 'en') && (lang(?verseText)='en'))
+}  
+```
+
+6.1 List of Verses of the Quran and the Events discussed in each verse (Arabic).
+```
+PREFIX : <http://quranontology.com/Resource/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX qur: <http://quranontology.com/Resource/>
+select distinct ?verse ?verseText ?eventLabel where { 
+	?verse a :Verse.
+    ?verse rdfs:label ?verseText.
+    ?event :MentionedIn ?verse .
+    ?event a qur:Event.
+    ?event rdfs:label ?eventLabel.
+    
+    FILTER ((lang(?eventLabel) = 'ar') && (lang(?verseText)='ar'))
+}  
+```
+6.2 List of Events of the Quran and the verses they are mentioned in  (Arabic).
+(NEEDS INFERENCE ON = (INCLUDE RESULTS FROM INFERRED DATA))
+```
+PREFIX : <http://quranontology.com/Resource/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX qur: <http://quranontology.com/Resource/>
+select distinct  ?eventLabel ?verse ?verseText where { 
+	?event a qur:Event.
+    ?event rdfs:label ?eventLabel.
+    ?event :MentionedIn ?verse .
+    ?verse a :Verse.
+    ?verse rdfs:label ?verseText.
+   
+    FILTER ((lang(?eventLabel) = 'ar') && (lang(?verseText)='ar'))
+}  
+```
