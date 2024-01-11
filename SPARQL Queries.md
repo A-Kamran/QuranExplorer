@@ -1,4 +1,4 @@
-# SPQRQL Queries for the Quran Explorer Project
+# SPARQL Queries for the Quran Explorer Project
 
 The given SPARQL are _examples_ that may be reinterpreted and reused for applications.
 
