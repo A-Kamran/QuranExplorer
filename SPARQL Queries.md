@@ -268,4 +268,22 @@ WHERE {
 }
 ORDER BY ASC(?numericValue)
 ```
+8. List of Ayahs with Text in order
+```
+PREFIX : <http://quranontology.com/Resource/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?ayah ?ayahText ?surah ?SName
+WHERE { 
+    ?ayah a :Verse.
+    ?ayah :IsPartOf ?surah.
+    ?ayah rdfs:label ?ayahText.
+    ?surah rdfs:label ?SName.
+	FILTER ((lang(?ayahText) = 'ar') && (lang(?SName)='ar'))
+    # Extract numeric part from the URI using regex
+   BIND(xsd:integer(REPLACE(STRAFTER(str(?ayah), "http://quranontology.com/Resource/quran"), "-", "")) AS ?numericValue)
+}
+ORDER BY ASC(?numericValue)
+```
 
