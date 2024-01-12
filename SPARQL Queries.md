@@ -250,3 +250,22 @@ select distinct  ?eventLabel ?verse ?verseText where {
     FILTER ((lang(?eventLabel) = 'ar') && (lang(?verseText)='ar'))
 }  
 ```
+
+7. List of Surahs in order
+```
+PREFIX : <http://quranontology.com/Resource/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?s ?label
+WHERE { 
+    ?s a :Chapter .
+    ?s rdfs:label ?label.
+    FILTER (lang(?label) = 'ar')
+    # Extract numeric part from the URI using regex
+    BIND(STRAFTER(str(?s), "http://quranontology.com/Resource/quran") AS ?numericPart)
+    BIND(xsd:integer(?numericPart) AS ?numericValue)
+}
+ORDER BY ASC(?numericValue)
+```
+
