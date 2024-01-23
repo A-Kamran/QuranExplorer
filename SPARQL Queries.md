@@ -298,4 +298,15 @@ select ?topic ?Topiclabel ?subTopic ?subTopicLabel where {
     FILTER ((lang(?Topiclabel) = 'en') && (lang(?subTopicLabel)='en'))
 }
 ```
-
+10. Refereces to Paradise
+```
+PREFIX : <http://quranontology.com/Resource/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+select * where
+{
+    ?s :RefTo ?b. 
+    ?b rdfs:label ?a.
+     FILTER regex(?a, "paradise", "i")
+   
+}
+```
