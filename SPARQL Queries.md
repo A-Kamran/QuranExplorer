@@ -310,3 +310,30 @@ select * where
    
 }
 ```
+11. Surah
+```
+    PREFIX : <http://quranontology.com/Resource/>
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT DISTINCT ?Surah ?verse ?topic ?TopicLabel ?person ?entity  WHERE { 
+    ?verse a :Verse.
+    ?verse :IsPartOf :quran20.
+    :quran20 rdfs:label ?Surah.
+     OPTIONAL { 
+    ?verse :DiscussTopic ?topic.
+    ?topic rdfs:label ?TopicLabel.
+    }
+    OPTIONAL {
+        ?verse :ContainsMentionOf ?Person.
+        ?Person a :Human.
+        ?Person rdfs:label ?person.
+    }
+        OPTIONAL {
+        ?verse :ContainsMentionOf ?Entity.
+        ?Entity a :Location.
+        ?Entity rdfs:label ?entity.
+    }
+
+    FILTER ((lang(?TopicLabel) = 'ar') && (lang(?person)='ar') && (lang(?entity)='ar') && (lang(?Surah)='ar'))
+}
+```
