@@ -337,3 +337,19 @@ SELECT DISTINCT ?Surah ?verse ?topic ?TopicLabel ?person ?entity  WHERE {
     FILTER ((lang(?TopicLabel) = 'ar') && (lang(?person)='ar') && (lang(?entity)='ar') && (lang(?Surah)='ar'))
 }
 ```
+12. Count of Mentions
+    ```
+    PREFIX : <http://quranontology.com/Resource/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?mention (COUNT(?mention) AS ?mentionCount)
+WHERE {
+  ?verse :ContainsMentionOf ?mention.
+  ?mention a :Human.
+}
+GROUP BY ?mention
+ORDER BY DESC(?mentionCount)
+```
+
+
