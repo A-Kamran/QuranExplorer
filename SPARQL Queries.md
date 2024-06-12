@@ -34,6 +34,22 @@ VALUES (?name)
 }
 ```
 
+3. Question: Which topics are discussed by at least three Hadith narrations?
+
+```
+PREFIX : <http://www.tafsirtabari.com/ontology#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT DISTINCT ?topic
+WHERE {
+   ?hadith a :Hadith.
+  ?hadith :hasTheme ?topic .
+}
+GROUP BY ?topic
+HAVING (COUNT(?hadith) >= 3)
+```
+
+4. How many hadith were narrated by RAWI_A?
 
 
 # SPARQL Queries for the Quran Explorer Project
