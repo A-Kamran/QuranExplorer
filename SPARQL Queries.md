@@ -1,3 +1,41 @@
+# SPARQL Queries for the Tafsir Project
+
+1. What is the most narrated Topic by Narrator A?
+```
+PREFIX : <http://www.tafsirtabari.com/ontology#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+select  ?theme (COUNT(?hadith) AS ?numHadiths)
+{ 
+    ?hadith :hasHadithText/:hasText ?hadithText.
+    ?hadith :containsNarratorChain/:hasNarratorSegment/:refersTo ?y .
+    ?y :hasName "ابن عباس".
+    ?hadith :hasTheme ?theme.
+} 
+
+GROUP BY ?theme
+ORDER BY DESC(?numHadiths)
+
+```
+
+2.  Find all the hadith narrated from ابن عباس and their topics/themes?
+```
+PREFIX : <http://www.tafsirtabari.com/ontology#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+select ?hadith ?hadithText ?theme
+{ 
+    ?hadith :hasHadithText/:hasText ?hadithText.
+    ?hadith :containsNarratorChain/:hasNarratorSegment/:refersTo ?y .
+    ?y :hasName ?name.
+    ?hadith :hasTheme ?theme.
+} 
+VALUES (?name)
+{
+    ("ابن عباس")
+}
+```
+
+
+
 # SPARQL Queries for the Quran Explorer Project
 
 The given SPARQL are _examples_ that may be reinterpreted and reused for applications.
