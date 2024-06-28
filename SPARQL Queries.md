@@ -1,6 +1,14 @@
 # SPARQL Queries for the Tafsir Project
+```
+PREFIX : <http://www.tafsirtabari.com/ontology#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+select Distinct ?o ?name
+where {
+    ?s :mentions ?o.
+    ?o rdf:type :Person.
+    ?o :hasName ?name.
 
-1. What is the most narrated Topic by Narrator A?
+}
 ```
 PREFIX : <http://www.tafsirtabari.com/ontology#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
