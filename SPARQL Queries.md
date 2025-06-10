@@ -373,10 +373,11 @@ select * where
    
 }
 ```
-11. Surah
-```
-    PREFIX : <http://quranontology.com/Resource/>
 
+11. Surah
+
+```
+PREFIX : <http://quranontology.com/Resource/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 SELECT DISTINCT ?Surah ?verse ?topic ?TopicLabel ?person ?entity  WHERE { 
     ?verse a :Verse.
@@ -400,9 +401,11 @@ SELECT DISTINCT ?Surah ?verse ?topic ?TopicLabel ?person ?entity  WHERE {
     FILTER ((lang(?TopicLabel) = 'ar') && (lang(?person)='ar') && (lang(?entity)='ar') && (lang(?Surah)='ar'))
 }
 ```
+
 12. Count of Mentions
-    ```
-    PREFIX : <http://quranontology.com/Resource/>
+
+```
+PREFIX : <http://quranontology.com/Resource/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 
