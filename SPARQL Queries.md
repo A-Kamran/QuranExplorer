@@ -10,6 +10,7 @@ where {
 
 }
 ```
+```
 PREFIX : <http://www.tafsirtabari.com/ontology#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 select  ?theme (COUNT(?hadith) AS ?numHadiths)
