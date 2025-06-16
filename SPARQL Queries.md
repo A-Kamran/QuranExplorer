@@ -1,4 +1,4 @@
-# SPARQL Queries for the Tafsir Project
+# SPARQL Queries for the Quran Project
 ```
 PREFIX : <http://www.tafsirtabari.com/ontology#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -419,3 +419,48 @@ ORDER BY DESC(?mentionCount)
 ```
 
 
+13. Sub topics of Allah/Tauheed
+```
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX qur: <http://quranontology.com/Resource/>
+PREFIX : <http://quranontology.com/Resource/>
+ 
+
+select distinct ?i ?name  where {
+    :Topic1-1-1 qur:HasSubTopic ?i.
+    ?i rdfs:label ?name.
+    FILTER ((lang(?name) = 'en'))
+}
+```
+
+14. Annotations of These Topics
+```
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX qur: <http://quranontology.com/Resource/>
+PREFIX : <http://quranontology.com/Resource/>
+ 
+
+   select distinct ?topic ?verse where {
+    :Topic1-1-1-9 rdfs:label ?topic;
+    :DiscussedIn ?verse.
+    FILTER ((lang(?topic) = 'ar'))
+}
+```
+14. Annotation Counts of These Topics
+
+```
+PREFIX : <http://quranontology.com/Resource/>
+PREFIX qur: <http://quranontology.com/Resource/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?i ?topic (COUNT(DISTINCT ?verse) AS ?verseCount)
+
+WHERE {
+  :Topic1-1-1-20 qur:HasSubTopic ?i.
+  ?i rdfs:label ?topic;
+     :DiscussedIn ?verse.
+  FILTER (lang(?topic) = 'ar')
+}
+GROUP BY ?i ?topic
+
+```
